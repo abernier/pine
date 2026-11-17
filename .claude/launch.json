@@ -3,8 +3,8 @@
   "configurations": [
     {
       "name": "desktop-page",
-      "runtimeExecutable": "sh",
-      "runtimeArgs": ["-c", "exec desktop/node_modules/.bin/vite desktop --port \"${PORT:-5173}\" --strictPort"],
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "desktop", "run", "page"],
       "port": 5173
     }
   ]
