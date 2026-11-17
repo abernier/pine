@@ -4,7 +4,7 @@
     {
       "name": "desktop-page",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["--prefix", "desktop", "run", "page"],
+      "runtimeArgs": ["--prefix", "desktop", "run", "dev:page"],
       "port": 5173
     }
   ]
