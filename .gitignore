@@ -32,7 +32,8 @@ Thumbs.db
 *~
 
 # Assistants' local settings
-.claude/
+.claude/*
+!.claude/launch.json
 
 # The package made for npm (npm run build)
 build/
