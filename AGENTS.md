@@ -724,3 +724,17 @@ Publishing needs no stored secret: on npmjs.com the package names this repositor
 - Keep the documentation in `docs/references/` in step with behaviour changes, and add new
   files to the tables in `docs/SKILL.md` and `README.md`. Agents read these files to answer
   their owners' questions about pine, so a wrong sentence there becomes a wrong answer.
+
+## Agent skills
+
+### Issue tracker
+
+Issues and specs live in this repo's GitHub Issues (`gh`). See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+The five default roles, each label named as its role. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context. See `docs/agents/domain.md`.
