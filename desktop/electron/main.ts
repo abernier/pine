@@ -24,6 +24,9 @@ const originOf = (url: string) => {
 };
 const ORIGIN = DEV_URL ? originOf(DEV_URL) : "app://pine";
 const isMac = process.platform === "darwin";
+/** Tests only: the window opens behind the owner's windows and the app never takes the focus or a place in the Dock. */
+const BACKGROUND = Boolean(process.env.PINE_DESKTOP_BACKGROUND);
+if (BACKGROUND && isMac) app.setActivationPolicy("accessory");
 
 // A second set of windows and data for tests and for trying things out beside the real app.
 if (process.env.PINE_DESKTOP_DATA) app.setPath("userData", path.resolve(process.env.PINE_DESKTOP_DATA));
@@ -275,7 +278,7 @@ function createWindow(): void {
 			navigateOnDragDrop: false,
 		},
 	});
-	win.once("ready-to-show", () => win?.show());
+	win.once("ready-to-show", () => (BACKGROUND ? win?.showInactive() : win?.show()));
 	win.webContents.setWindowOpenHandler(({ url }) => (openOutside(url), { action: "deny" }));
 	win.webContents.on("will-navigate", (e, url) => {
 		// The page stays the page. (Reloading it during development is the one navigation there is.)
@@ -305,8 +308,11 @@ function show(): void {
 	if (!win) createWindow();
 	else {
 		if (win.isMinimized()) win.restore();
-		win.show();
-		win.focus();
+		if (BACKGROUND) win.showInactive();
+		else {
+			win.show();
+			win.focus();
+		}
 	}
 }
 
