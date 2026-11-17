@@ -17,9 +17,9 @@ if (fs.existsSync(source)) {
 	// A fresh checkout: fetch what pine is built on, once, so that the first command just works.
 	if (!fs.existsSync(path.join(root, "node_modules", "@earendil-works", "pi-coding-agent"))) {
 		console.error("pine: installing its dependencies (once) ...");
-		const done = spawnSync("npm", ["install", "--no-audit", "--no-fund"], { cwd: root, stdio: ["ignore", 2, 2] });
+		const done = spawnSync("pnpm", ["install", "--frozen-lockfile"], { cwd: root, stdio: ["ignore", 2, 2] });
 		if (done.status !== 0) {
-			console.error(`pine: npm install failed; run it in ${root} to see why`);
+			console.error(`pine: pnpm install failed (pine needs pnpm: https://pnpm.io/installation); run it in ${root} to see why`);
 			process.exit(1);
 		}
 	}

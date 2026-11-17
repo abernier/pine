@@ -90,32 +90,32 @@ cd desktop
 ```
 
 ```bash
-npm install
+pnpm install
 ```
 
 ```bash
-npm start
+pnpm start
 ```
 
-`npm run dev` is the same with the page reloading as you edit it. To make an app that can be
+`pnpm run dev` is the same with the page reloading as you edit it. To make an app that can be
 put into Applications:
 
 ```bash
-npm run pack
+pnpm run pack
 ```
 
 That writes `desktop/release/mac-arm64/Pine.app` (on an Intel Mac `release/mac/Pine.app`;
-`npm run dist` also makes a disk image). It is the app as it is handed out, signed for the Mac
+`pnpm run dist` also makes a disk image). It is the app as it is handed out, signed for the Mac
 it was built on. See "Packing and signing" for what it carries and how it is signed for others.
 
 | Command (in `desktop/`) | What it does |
 |---|---|
-| `npm start` | Builds the app and opens it |
-| `npm run dev` | Opens it with the page served by Vite, reloading on every change |
-| `npm run check` | Type check |
-| `npm test` | The app from end to end: the real app on a pine home of its own with a scripted model. Needs a screen. With `PINE_LIVE=1` on a Mac it also dictates with the real voice helper, from a recording |
-| `npm run pack` | `release/mac-arm64/Pine.app`, with pine, Node and the helpers inside |
-| `npm run dist` | The same, and a disk image |
+| `pnpm start` | Builds the app and opens it |
+| `pnpm run dev` | Opens it with the page served by Vite, reloading on every change |
+| `pnpm run check` | Type check |
+| `pnpm test` | The app from end to end: the real app on a pine home of its own with a scripted model. Needs a screen. With `PINE_LIVE=1` on a Mac it also dictates with the real voice helper, from a recording |
+| `pnpm run pack` | `release/mac-arm64/Pine.app`, with pine, Node and the helpers inside |
+| `pnpm run dist` | The same, and a disk image |
 | `node scripts/smoke.mjs` | Starts a packed app from a folder of its own, on a home of its own, and checks that it answers a message with the pine and the Node it carries, that `pine` works through a link, and that pine finds the helpers in the app |
 
 pine itself runs on Node 24 or newer, also when the app starts it, and never on the app's own
@@ -368,7 +368,7 @@ itself. What it knows, the daemon told it.
 
 ## Packing and signing
 
-`node scripts/pack.mjs` (in `desktop/`; `npm run pack`) makes the app that is handed out.
+`node scripts/pack.mjs` (in `desktop/`; `pnpm run pack`) makes the app that is handed out.
 
 | Flag | What it does |
 |---|---|
@@ -381,7 +381,7 @@ What goes into `Pine.app/Contents/Resources`:
 
 | Folder | What it is |
 |---|---|
-| `pine/` | The package `npm run build` makes, with its dependencies installed, and the helpers built by `scripts/helpers.mjs` in `prebuilt/` folders beside their sources (pine looks there before it builds one: `src/prebuilt.ts`) |
+| `pine/` | The package `pnpm run build` makes, with its dependencies installed, and the helpers built by `scripts/helpers.mjs` in `prebuilt/` folders beside their sources (pine looks there before it builds one: `src/prebuilt.ts`) |
 | `node/` | `bin/node` and its licence from nodejs.org, in the version of the Node that runs the pack script, checked against the checksums nodejs.org publishes |
 | `bin/pine` | The launcher for a terminal (`scripts/pine.sh`) |
 

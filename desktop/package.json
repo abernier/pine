@@ -7,6 +7,7 @@
   "type": "module",
   "license": "MIT",
   "main": "dist-electron/main.js",
+  "packageManager": "pnpm@10.33.4",
   "scripts": {
     "dev": "node scripts/dev.mjs",
     "build": "node scripts/build.mjs",
@@ -46,5 +47,14 @@
     "react-dom": "^19.3.1",
     "typescript": "^7.0.2",
     "vite": "^8.3.8"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "electron",
+      "esbuild"
+    ],
+    "ignoredBuiltDependencies": [
+      "electron-winstaller"
+    ]
   }
 }

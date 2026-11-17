@@ -1,5 +1,5 @@
 // Development: the page from Vite's server (it reloads as you edit), the main process built once.
-//   npm run dev
+//   pnpm run dev
 import { spawn } from "node:child_process";
 import { createRequire } from "node:module";
 import path from "node:path";

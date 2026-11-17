@@ -1,7 +1,7 @@
 // Builds pine's helpers (voice, app control, the `system` source) for both kinds of Mac and puts
 // them into a pine folder, beside their sources, where pine looks for them (src/prebuilt.ts).
 // For the Pine app, which carries pine whole: a Mac without Apple's developer tools then has them.
-//   node scripts/helpers.mjs <pine folder>      the package `npm run build` makes, or a copy of it
+//   node scripts/helpers.mjs <pine folder>      the package `pnpm run build` makes, or a copy of it
 // Needs the macOS 26 SDK or a newer one (Xcode 26, or the command line tools of that time): the voice
 // helper uses the speech recognition macOS 26 brought, where a Mac has it.
 //

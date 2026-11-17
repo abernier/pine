@@ -113,7 +113,7 @@ Apple silicon and for Intel. It carries pine and the Node it runs on, so nothing
 be installed, and it gives your shell the `pine` command. From a checkout:
 
 ```bash
-npm run desktop
+pnpm run desktop
 ```
 
 To get a newer version later, with whatever it needs:

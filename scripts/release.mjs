@@ -1,5 +1,5 @@
 // Publishes pine to npm with the next version. Run by the Release workflow on every push to main
-// and to next, or by hand with "npm run release". "--dry-run" shows what would happen and
+// and to next, or by hand with "pnpm run release". "--dry-run" shows what would happen and
 // publishes nothing.
 //
 // The version follows from the commits since the last release; the rules are in version.mjs.

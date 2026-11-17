@@ -74,7 +74,7 @@ node reel/app-shots.mjs
 starts the app from `desktop/` on a pine home of its own, with the scripted model server of
 pine's tests, has an agent change a project and lets a letter arrive in a folder another agent
 watches, and keeps a picture of every change of the window. It needs a Mac with a screen and
-`npm install` in `desktop/`. While it runs, the home and the folders the app shows lie under
+`pnpm install` in `desktop/`. While it runs, the home and the folders the app shows lie under
 `/Users/Shared`, so that the app writes them as `~/dev/flipper` and `~/Documents/scans`; they
 are removed when it ends. Without those pictures the film still renders, without the app's two
 scenes.

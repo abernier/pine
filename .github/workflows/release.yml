@@ -60,13 +60,14 @@ jobs:
         with:
           fetch-depth: 0 # the commits since the last release decide the version
           persist-credentials: false
+      - uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
       - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
         with:
           node-version: 24
           registry-url: 'https://registry.npmjs.org'
           package-manager-cache: false
-      - run: npm ci
-      - run: npm run check
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run check
       - id: publish
         run: node scripts/release.mjs
         env:
@@ -128,6 +129,8 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
       - if: steps.signing.outputs.ready == 'true'
+        uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
+      - if: steps.signing.outputs.ready == 'true'
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
         with:
           node-version: 24 # also the Node the app carries
@@ -146,7 +149,7 @@ jobs:
             exit 1
           fi
       - if: steps.signing.outputs.ready == 'true'
-        run: npm ci && npm ci --prefix desktop
+        run: pnpm install --frozen-lockfile && pnpm --dir desktop install --frozen-lockfile
       - if: steps.signing.outputs.ready == 'true'
         name: Pack, sign and notarise
         run: node desktop/scripts/pack.mjs --dmg --arch ${{ matrix.arch }}

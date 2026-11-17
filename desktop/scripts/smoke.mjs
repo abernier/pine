@@ -1,6 +1,6 @@
 // Starts a packed app on a pine home of its own and looks whether it comes up with the pine it
 // carries inside, on the Node it carries, and whether `pine` for a terminal and the built helpers
-// are what pine finds. For checking what `npm run pack` made.
+// are what pine finds. For checking what `pnpm run pack` made.
 //   node scripts/smoke.mjs [release/mac-arm64/Pine.app]
 import { execFileSync, spawn } from "node:child_process";
 import fs from "node:fs";

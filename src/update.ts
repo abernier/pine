@@ -246,7 +246,7 @@ export async function update(opts: { check: boolean; out: (line: string) => void
 			return 1;
 		}
 		out("Installing what the new version depends on ...");
-		if (show("npm", ["install", "--no-audit", "--no-fund"], me.root) !== 0) return 1;
+		if (show("pnpm", ["install", "--frozen-lockfile"], me.root) !== 0) return 1;
 	} else if (me.kind === "app") {
 		const latest = await fromRegistry(me.name);
 		if (!latest) {

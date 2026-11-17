@@ -6,7 +6,7 @@
 //   node reel/app-shots.mjs            -> reel/assets/front/0001.png ..., and shots.js that lists them
 //   node reel/app-shots.mjs --keep     leaves the home and the folders it made, to look at them
 //
-// It needs a Mac with a screen, and desktop/ installed (`npm install` there). The home and the
+// It needs a Mac with a screen, and desktop/ installed (`pnpm install` there). The home and the
 // folders the app shows lie under /Users/Shared while it runs, so that the app writes them as
 // ~/dev/flipper and ~/Documents/scans; they are removed at the end. Nothing here is real: the
 // project, the letters and what the agents say about them are made up.

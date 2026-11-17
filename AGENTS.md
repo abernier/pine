@@ -8,16 +8,16 @@ to change the code.
 
 | Command | What it does |
 |---|---|
-| `npm test` | All tests against the scripted model server. About ten seconds. Run it after every change. |
-| `npm run build` | Makes the npm package in `build/`: the sources compiled to JavaScript at the same paths, plus docs and examples. Node runs TypeScript directly in a checkout but not inside `node_modules`, so only the package is compiled. Code that names one of pine's own module files at run time uses `EXT` from `src/config.ts` (".ts" or ".js"). |
-| `npm run release` | What the Release workflow runs on every push to `main` and to `next` (`.github/workflows/release.yml`): works out the next version, builds, publishes to npm, and marks the release with a tag. From `next` it is a preview (`--next` by hand). `node scripts/release.mjs --dry-run` shows the version and checks the package without publishing. The checkout's `package.json` is marked private so that the sources are never published uncompiled. |
-| `npm run check` | Type check (`tsc --noEmit`). |
+| `pnpm test` | All tests against the scripted model server. About ten seconds. Run it after every change. |
+| `pnpm run build` | Makes the npm package in `build/`: the sources compiled to JavaScript at the same paths, plus docs and examples. Node runs TypeScript directly in a checkout but not inside `node_modules`, so only the package is compiled. Code that names one of pine's own module files at run time uses `EXT` from `src/config.ts` (".ts" or ".js"). |
+| `pnpm run release` | What the Release workflow runs on every push to `main` and to `next` (`.github/workflows/release.yml`): works out the next version, builds, publishes to npm, and marks the release with a tag. From `next` it is a preview (`--next` by hand). `node scripts/release.mjs --dry-run` shows the version and checks the package without publishing. The checkout's `package.json` is marked private so that the sources are never published uncompiled. |
+| `pnpm run check` | Type check (`tsc --noEmit`). |
 | `npm run test:live` | End-to-end through `claude -p`, plus the real browser and, on a Mac, the real app control helper and the helper of the `system` source. Slow, uses a Claude plan and the network. Run it when you change prompts, tool descriptions, `src/dev/claude-model.ts`, `mcp/browser.ts`, `mcp/computer.ts` or `mcp/computer.swift`. The tests that operate TextEdit skip themselves unless the terminal app they run in has the Accessibility and Screen Recording grants. |
-| `npm run baseline` | The 59 pi SDK checks in `baseline/`. Run it after upgrading pi. |
+| `pnpm run baseline` | The 59 pi SDK checks in `baseline/`. Run it after upgrading pi. |
 | `node src/cli.ts <command>` | The CLI without installing it. |
-| `npm run desktop` | The desktop app (`desktop/`, Electron), built and opened. It has its own `package.json` and `node_modules`: `npm install` in `desktop/` once. `npm run dev` there reloads the page as you edit. |
-| `npm run desktop:test` | The desktop app from end to end: the real app, through its real window, on a pine home of its own with the scripted model server. About thirty seconds; needs a screen. Run it when you change `desktop/`, the control API the app uses (`src/http.ts`, `src/owner.ts`) or `pine service`. `npm run check` in `desktop/` is its type check. |
-| `npm run desktop:pack` | `desktop/release/mac-arm64/Pine.app` (`mac/` on Intel), with the package of `npm run build` and its dependencies, the Node it runs on, pine's helpers built (`scripts/helpers.mjs`) and `pine` for a terminal inside, signed with the hardened runtime. `node desktop/scripts/smoke.mjs` starts that app from a folder of its own and checks that it runs on the pine and the Node it carries. Run both when you change `desktop/scripts/`, a helper's build function, `src/prebuilt.ts` or `desktop/electron/service.ts`. |
+| `pnpm run desktop` | The desktop app (`desktop/`, Electron), built and opened. It has its own `package.json` and `node_modules`: `pnpm install` in `desktop/` once. `pnpm run dev` there reloads the page as you edit. |
+| `npm run desktop:test` | The desktop app from end to end: the real app, through its real window, on a pine home of its own with the scripted model server. About thirty seconds; needs a screen. Run it when you change `desktop/`, the control API the app uses (`src/http.ts`, `src/owner.ts`) or `pine service`. `pnpm run check` in `desktop/` is its type check. |
+| `npm run desktop:pack` | `desktop/release/mac-arm64/Pine.app` (`mac/` on Intel), with the package of `pnpm run build` and its dependencies, the Node it runs on, pine's helpers built (`scripts/helpers.mjs`) and `pine` for a terminal inside, signed with the hardened runtime. `node desktop/scripts/smoke.mjs` starts that app from a folder of its own and checks that it runs on the pine and the Node it carries. Run both when you change `desktop/scripts/`, a helper's build function, `src/prebuilt.ts` or `desktop/electron/service.ts`. |
 
 There is no build step. Node runs the TypeScript directly (the compiled parts, pine's Swift
 helpers such as `mcp/computer.swift`, are built by pine on the Mac it runs on, on first use;
@@ -525,7 +525,7 @@ These are invariants. A change that breaks one needs a test that shows why it is
 ## pi behaviours pine depends on
 
 The baseline suite found these; each has a mitigation in the code. Re-check them when you
-upgrade pi (`npm run baseline`, then `npm test`).
+upgrade pi (`pnpm run baseline`, then `pnpm test`).
 
 | pi behaviour | Where pine handles it |
 |---|---|
@@ -607,7 +607,7 @@ Publishing needs no stored secret: on npmjs.com the package names this repositor
   (`term.type("text")` does) and wait with `sees()`, not with sleeps.
 - `pine init` downloads the browser. A test that runs it sets `PINE_SKIP_DOWNLOADS=1` (see
   `test/cli.test.ts`); the variable exists for tests only and is not a user option.
-- `npm test` passes `--test-force-exit`, so a leaked handle cannot hang the run; a test that
+- `pnpm test` passes `--test-force-exit`, so a leaked handle cannot hang the run; a test that
   fails must still not leave a daemon behind (see the `after` hooks in `test/support/harness.ts`).
 - The source types are tested on stand-ins that run on any system and need no network: a web
   server whose answers the test changes (`test/watch.test.ts`, `test/feeds.test.ts`), a
@@ -636,7 +636,7 @@ Publishing needs no stored secret: on npmjs.com the package names this repositor
   (`state.slotActions`). The `live:` test at the end of `test/live.test.ts` asserts the same on a real
   server (`PINE_LIVE_URL`), by the tokens the server says it read and kept.
 - The desktop app has its own tests in `desktop/test/`, run by `npm run desktop:test` and not
-  by `npm test`: they start the real app (Electron, driven by Playwright through its window)
+  by `pnpm test`: they start the real app (Electron, driven by Playwright through its window)
   on a temp home with the mock model server, and a daemon of its own on port 0, so a pine the
   developer has running is left alone. `sees()` there waits for something on screen and says
   what is there instead when it does not come. What a menu item does is sent as the menu
