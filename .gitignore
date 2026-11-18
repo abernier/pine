@@ -34,7 +34,11 @@ Thumbs.db
 # Assistants' local settings
 **/.claude/*
 !.claude/launch.json
+!.claude/settings.json
 !desktop/.claude/skills/
+
+# mattpocock-skills: each contributor's own specs and tickets (docs/agents/issue-tracker.md)
+.scratch/
 
 # The package made for npm (npm run build)
 build/

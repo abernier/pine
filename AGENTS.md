@@ -761,3 +761,23 @@ Publishing needs no stored secret: on npmjs.com the package names this repositor
 - Keep the documentation in `docs/references/` in step with behaviour changes, and add new
   files to the tables in `docs/SKILL.md` and `README.md`. Agents read these files to answer
   their owners' questions about pine, so a wrong sentence there becomes a wrong answer.
+
+## Agent skills
+
+For the engineering skills of `mattpocock-skills` (`to-spec`, `to-tickets`, `implement-spec`,
+`triage` and the others), if you use them.
+
+### Issue tracker
+
+Local markdown: specs and tickets are files under `.scratch/<feature>/`, which is gitignored, so
+each contributor's stay on their machine. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+The five default roles, each label equal to its name, written as a `Status:` line. See
+`docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context: one `GLOSSARY.md` and `docs/adr/` at the root, made when a term or a decision
+is first settled. See `docs/agents/domain.md`.
